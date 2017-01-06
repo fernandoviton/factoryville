@@ -5,6 +5,7 @@
     "**/.svn": true,
     "**/.hg": true,
     "**/.DS_Store": true,
-		"view-slack-darwin-*/": true
+		"view-slack-darwin-*/": true,
+    "node_modules": true
   }
 }

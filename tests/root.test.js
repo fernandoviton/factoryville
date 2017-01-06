@@ -1,16 +1,7 @@
-import { addToSequence } from '../actions/index.js'
+import { addToSequence, addCredits } from '../actions/index.js'
 import root from '../reducers/root'
 
-test('default root state', () => {
-	expect(root(undefined, {type: undefined})).toEqual(
-		{
-			numbers: [1, 1]
-		})
-})
-
-test('add to sequence adds next fib number', () => {
-	expect(root({numbers:[1,1]}, addToSequence())).toEqual(
-		{
-			numbers: [1,1,2]
-		})
+test('add the amount of credits', () => {
+	expect(root({credits: 10}, addCredits(5))).toEqual({credits: 15})
+	expect(root({credits: 10}, addCredits(-5))).toEqual({credits: 5})
 })

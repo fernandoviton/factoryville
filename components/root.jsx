@@ -1,7 +1,7 @@
 'use babel'
 
 import React from 'react'
-import { addToSequence } from '../actions/index.js'
+import { addCredits } from '../actions/index.js'
 
 export default class Root extends React.Component {
   render() {
@@ -10,15 +10,8 @@ export default class Root extends React.Component {
         var key = 0;
 
     return <div>
-      <button onClick={() => store.dispatch(addToSequence())}>+</button>
-      <div>
-      {
-        store.getState().numbers.map((i) => {
-          key = key + 1
-          return <button key={key}>{i}</button>
-        })
-      }
-      </div>
+      <button onClick={() => store.dispatch(addCredits(1))}>+</button>
+      <p>{store.getState().credits}</p>
     </div>
   }
 }
