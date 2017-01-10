@@ -6,11 +6,6 @@ export default (state = {numbers:[1,1], credits: startingResources.credits}, act
 
   switch (action.type)
   {
-    case 'ADD_TO_SEQUENCE':
-      const length = state.numbers.length;
-      const nextNumber = state.numbers[length-1] + state.numbers[length-2]
-      const newState = {numbers: [...state.numbers, nextNumber]}
-      return newState
     case 'ADD_CREDITS':
       return {credits: state.credits + action.numCredits}
   }
