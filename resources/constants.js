@@ -1,5 +1,6 @@
 export const startingResources = {
-	credits: 300
+	credits: 300,
+	factories: 0,
 }
 
 export const tickIncrement = 1

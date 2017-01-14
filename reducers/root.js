@@ -1,18 +1,16 @@
 import { startingResources } from '../resources/constants'
 
-export default (state = {numbers:[1,1], credits: startingResources.credits}, action) => {
+export default (state = {credits: startingResources.credits, gameTime: 0, numFactories: startingResources.factories}, action) => {
   
   console.log('handling action:', action)
 
-  switch (action.type)
-  {
-    case 'ADD_TO_SEQUENCE':
-      const length = state.numbers.length;
-      const nextNumber = state.numbers[length-1] + state.numbers[length-2]
-      const newState = {numbers: [...state.numbers, nextNumber]}
-      return newState
+  switch (action.type) {
     case 'ADD_CREDITS':
-      return {credits: state.credits + action.numCredits}
+      return {...state, credits: state.credits + action.numCredits}
+    case 'ADD_GAME_TIME':
+      return {...state, gameTime: state.gameTime + action.gameTime}
+    case 'ADD_FACTORIES':
+      return {...state, factories: state.factories + action.numFactories}
   }
 
   return state
