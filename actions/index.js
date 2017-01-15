@@ -13,3 +13,7 @@ export const addFactories = (numFactories) => ({
 	numFactories
 })
 
+export const advanceGameTime = () => ({
+	type: 'ADVANCE_GAME_TIME',
+	suppressLog: true
+})

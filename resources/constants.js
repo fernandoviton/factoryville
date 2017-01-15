@@ -5,7 +5,7 @@ export const startingResources = {
 
 export const tickInfo = {
 	frequenceInMs: 1000,
-	incrementMultiple : 2 // How much everything goes up each tick
+	incrementMultiple: 2 // How much everything goes up each tick
 }
 
 export const factoryInfo = {
