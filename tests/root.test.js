@@ -5,7 +5,7 @@ test('default state items exist', () => {
 	const state = root(undefined, {type: undefined})
 	expect(state.credits).not.toEqual(undefined)
 	expect(state.gameTime).not.toEqual(undefined)
-	expect(state.numFactories).not.toEqual(undefined)
+	expect(state.factories).not.toEqual(undefined)
 })
 
 test('add the amount of credits', () => {

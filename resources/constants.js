@@ -3,7 +3,10 @@ export const startingResources = {
 	factories: 0,
 }
 
-export const tickIncrement = 1
+export const tickInfo = {
+	frequenceInMs: 1000,
+	incrementMultiple: 2 // How much everything goes up each tick
+}
 
 export const factoryInfo = {
 	cost: 100,

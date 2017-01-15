@@ -1,5 +1,5 @@
 State
 - gameTime
 - credits
-- numberOfFactories
-- numberOfPowerPlants
+- factories
+- powerPlants
