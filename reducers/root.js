@@ -1,7 +1,9 @@
 import { startingResources, tickInfo, factoryInfo } from '../resources/constants'
 
 export default (state = {
-  credits: startingResources.credits, 
+  resources: {
+    credits: startingResources.credits,
+  }, 
   gameTime: 0, 
   factories: startingResources.factories,
   powerPlants: startingResources.powerPlants
@@ -13,20 +15,27 @@ action) => {
 
   switch (action.type) {
     case 'ADD_CREDITS':
-      return {...state, credits: state.credits + action.numCredits}
+      return {...state, 
+        resources: {
+          ...state.resources, 
+          credits: state.resources.credits + action.numCredits}}
     case 'ADD_GAME_TIME':
       return {...state, gameTime: state.gameTime + action.gameTime}
     case 'ADD_FACTORIES':
-      const maxNewFactories = Math.floor(state.credits / factoryInfo.cost)
+      const maxNewFactories = Math.floor(state.resources.credits / factoryInfo.cost.credits)
       const newFactories = Math.min(maxNewFactories, action.numFactories)
       return {...state, 
         factories: state.factories + newFactories,
-        credits: state.credits - (newFactories * factoryInfo.cost)}
+        resources: {
+          ...state.resources,
+          credits: state.resources.credits - (newFactories * factoryInfo.cost.credits)}        }
     case 'ADD_POWER_PLANTS':
       return {...state, powerPlants: state.powerPlants + action.numPowerPlants}
     case 'ADVANCE_GAME_TIME':
       return {...state, 
-          credits: state.credits + newCredits(state, tickInfo.incrementMultiple),
+          resources: {
+            ...state.resources, 
+            credits: state.resources.credits + newCredits(state, tickInfo.incrementMultiple)},
           gameTime: state.gameTime + tickInfo.incrementMultiple
       }
   }

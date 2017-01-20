@@ -12,12 +12,12 @@ export default class Root extends React.Component {
 
     return <div>
       <p>Game Time: {state.gameTime}</p>
-      <p>Credits: {state.credits}</p>
+      <p>Credits: {state.resources.credits}</p>
       <p>Factories: {state.factories}
-        <button onClick={() => store.dispatch(addFactories(1))}>create (-{factoryInfo.cost} credits)</button>
+        <button onClick={() => store.dispatch(addFactories(1))}>create (-{factoryInfo.cost.credits} credits)</button>
       </p>
       <p>Power Plants: {state.powerPlants}
-        <button onClick={() => store.dispatch(addFactories(1))}>create (-{powerplantInfo.cost} credits)</button>
+        <button onClick={() => store.dispatch(addFactories(1))}>create (-{powerplantInfo.cost.credits} credits)</button>
       </p>
     </div>
   }

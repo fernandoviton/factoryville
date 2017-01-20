@@ -10,12 +10,15 @@ export const tickInfo = {
 }
 
 export const factoryInfo = {
-	cost: 100,
+	cost: {
+		credits: 100 
+	},
 	creditProduction: .25,
 	requiredPower: .1
 }
 
 export const powerplantInfo = {
-	cost: 180,
+	cost: {
+		credits: 180},
 	powerProduction: 1
 }
