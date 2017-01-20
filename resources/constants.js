@@ -1,6 +1,7 @@
 export const startingResources = {
 	credits: 300,
 	factories: 0,
+	powerPlants: 0,
 }
 
 export const tickInfo = {

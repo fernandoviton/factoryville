@@ -1,9 +1,10 @@
-import { startingResources, tickInfo } from '../resources/constants'
+import { startingResources, tickInfo, factoryInfo } from '../resources/constants'
 
 export default (state = {
   credits: startingResources.credits, 
   gameTime: 0, 
-  factories: startingResources.factories
+  factories: startingResources.factories,
+  powerPlants: startingResources.powerPlants
 }, 
 action) => {
   
@@ -16,7 +17,13 @@ action) => {
     case 'ADD_GAME_TIME':
       return {...state, gameTime: state.gameTime + action.gameTime}
     case 'ADD_FACTORIES':
-      return {...state, factories: state.factories + action.numFactories}
+      const maxNewFactories = Math.floor(state.credits / factoryInfo.cost)
+      const newFactories = Math.min(maxNewFactories, action.numFactories)
+      return {...state, 
+        factories: state.factories + newFactories,
+        credits: state.credits - (newFactories * factoryInfo.cost)}
+    case 'ADD_POWER_PLANTS':
+      return {...state, powerPlants: state.powerPlants + action.numPowerPlants}
     case 'ADVANCE_GAME_TIME':
       return {...state, 
           credits: state.credits + newCredits(state, tickInfo.incrementMultiple),

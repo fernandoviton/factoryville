@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { addFactories } from '../actions/index.js'
+import { factoryInfo, powerplantInfo } from '../resources/constants'
 
 export default class Root extends React.Component {
   render() {
@@ -10,11 +11,14 @@ export default class Root extends React.Component {
     console.log('store on Root render:', state)
 
     return <div>
-      <button onClick={() => store.dispatch(addFactories(1))}>+</button>
       <p>Game Time: {state.gameTime}</p>
       <p>Credits: {state.credits}</p>
-      <p>Factories: {state.factories}</p>
-      <p>Power Plants: {state.powerPlants}</p>
+      <p>Factories: {state.factories}
+        <button onClick={() => store.dispatch(addFactories(1))}>create (-{factoryInfo.cost} credits)</button>
+      </p>
+      <p>Power Plants: {state.powerPlants}
+        <button onClick={() => store.dispatch(addFactories(1))}>create (-{powerplantInfo.cost} credits)</button>
+      </p>
     </div>
   }
 }
