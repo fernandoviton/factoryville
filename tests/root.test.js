@@ -17,7 +17,3 @@ test('add the amount of credits', () => {
 test('adding game time', () => {
 	expect(root({somethingElse: 1, gameTime: 100}, addGameTime(1))).toEqual({somethingElse: 1, gameTime: 101})
 })
-
-test('adding power plants', () => {
-	expect(root({somethingElse: 1, powerPlants: 5}, addPowerPlants(1))).toEqual({somethingElse: 1, powerPlants: 6})
-})

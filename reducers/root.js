@@ -1,4 +1,4 @@
-import { startingResources, tickInfo, factoryInfo } from '../resources/constants'
+import { startingResources, tickInfo, factoryInfo, powerPlantInfo } from '../resources/constants'
 
 export default (state = {
   resources: {
@@ -10,8 +10,9 @@ export default (state = {
 }, 
 action) => {
   
-  if (action.suppressLog === undefined)
-    console.log('handling action:', action)
+  if (action.suppressLog === undefined) {
+    console.log('handling action:', action, state)
+  }
 
   switch (action.type) {
     case 'ADD_CREDITS':
@@ -22,15 +23,19 @@ action) => {
     case 'ADD_GAME_TIME':
       return {...state, gameTime: state.gameTime + action.gameTime}
     case 'ADD_FACTORIES':
-      const maxNewFactories = Math.floor(state.resources.credits / factoryInfo.cost.credits)
-      const newFactories = Math.min(maxNewFactories, action.numFactories)
+      const newFactories = newAssetCount(state.resources, factoryInfo, action.numFactories)
       return {...state, 
         factories: state.factories + newFactories,
         resources: {
           ...state.resources,
-          credits: state.resources.credits - (newFactories * factoryInfo.cost.credits)}        }
+          credits: state.resources.credits - (newFactories * factoryInfo.cost.credits)}}
     case 'ADD_POWER_PLANTS':
-      return {...state, powerPlants: state.powerPlants + action.numPowerPlants}
+      const newPowerPlants = newAssetCount(state.resources, powerPlantInfo, action.numPowerPlants)
+      return {...state, 
+        powerPlants: state.powerPlants + newPowerPlants,
+        resources: {
+          ...state.resources,
+          credits: state.resources.credits - (newPowerPlants * powerPlantInfo.cost.credits)}}
     case 'ADVANCE_GAME_TIME':
       return {...state, 
           resources: {
@@ -45,4 +50,12 @@ action) => {
 
 const newCredits = (state, incrementMultiple) => {
   return state.factories * incrementMultiple
+}
+
+const newAssetCount = (maxResourcesToSpend, assetInfo, requestedNewAssetCount) => {
+  const maxCreditsToSpend = maxResourcesToSpend.credits
+  const assetCost = assetInfo.cost.credits
+  const maxNewAssetCount = Math.floor(maxCreditsToSpend / assetCost)
+  const newAssetCount = Math.min(maxNewAssetCount, requestedNewAssetCount)
+  return newAssetCount 
 }

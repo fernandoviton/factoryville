@@ -1,5 +1,5 @@
 export const startingResources = {
-	credits: 300,
+	credits: 3000,
 	factories: 0,
 	powerPlants: 0,
 }
@@ -17,7 +17,7 @@ export const factoryInfo = {
 	requiredPower: .1
 }
 
-export const powerplantInfo = {
+export const powerPlantInfo = {
 	cost: {
 		credits: 180},
 	powerProduction: 1

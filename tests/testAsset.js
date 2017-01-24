@@ -6,11 +6,6 @@ export default (assetName, assetInfo, addAsset, reducer, makeState) => {
 		expect(reducer(Object.assign({somethingElse: 1}, makeState(0, 0)), addAsset(2)).somethingElse).toEqual(1)
 		expect(reducer(makeState(0, 0, 1), addAsset(2)).resources.someOtherResource).toEqual(1)
 	})
-
-	test('adding ' + assetName + ' leaves unknown state alone', () => {
-		expect(reducer(Object.assign({somethingElse: 1}, makeState(0, 0)), addAsset(2)).somethingElse).toEqual(1)
-		expect(reducer(makeState(0, 0, 1), addAsset(2)).resources.someOtherResource).toEqual(1)
-	})
 	
 	test('adding ' + assetName + ' removes credits and increments', () => {
 		expect(reducer(makeState(0, costPerAsset * 3), addAsset(1))).toEqual(makeState(1, costPerAsset * 2))

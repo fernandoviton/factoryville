@@ -1,8 +1,8 @@
 'use babel'
 
 import React from 'react'
-import { addFactories } from '../actions/index.js'
-import { factoryInfo, powerplantInfo } from '../resources/constants'
+import { addFactories, addPowerPlants } from '../actions/index.js'
+import { factoryInfo, powerPlantInfo } from '../resources/constants'
 
 export default class Root extends React.Component {
   render() {
@@ -17,7 +17,7 @@ export default class Root extends React.Component {
         <button onClick={() => store.dispatch(addFactories(1))}>create (-{factoryInfo.cost.credits} credits)</button>
       </p>
       <p>Power Plants: {state.powerPlants}
-        <button onClick={() => store.dispatch(addFactories(1))}>create (-{powerplantInfo.cost.credits} credits)</button>
+        <button onClick={() => store.dispatch(addPowerPlants(1))}>create (-{powerPlantInfo.cost.credits} credits)</button>
       </p>
     </div>
   }
