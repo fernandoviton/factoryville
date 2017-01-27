@@ -1,4 +1,5 @@
 import { startingResources, tickInfo, factoryInfo, powerPlantInfo } from '../resources/constants'
+import { poweredFactories } from '../util/state'
 
 export default (state = {
   resources: {
@@ -48,8 +49,13 @@ action) => {
   return state
 }
 
+const newCreditsFromFactories = (state) => {
+  const numFactories = poweredFactories(state)
+  return numFactories * factoryInfo.creditProduction
+}
+
 const newCredits = (state, incrementMultiple) => {
-  return state.factories * incrementMultiple
+  return newCreditsFromFactories(state) * incrementMultiple
 }
 
 const newAssetCount = (maxResourcesToSpend, assetInfo, requestedNewAssetCount) => {
