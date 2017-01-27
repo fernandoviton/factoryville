@@ -13,6 +13,11 @@ export const addFactories = (numFactories) => ({
 	numFactories
 })
 
+export const addPowerPlants = (numPowerPlants) => ({
+	type: 'ADD_POWER_PLANTS',
+	numPowerPlants
+})
+
 export const advanceGameTime = () => ({
 	type: 'ADVANCE_GAME_TIME',
 	suppressLog: true

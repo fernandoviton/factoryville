@@ -1,6 +1,7 @@
 export const startingResources = {
-	credits: 300,
+	credits: 3000,
 	factories: 0,
+	powerPlants: 0,
 }
 
 export const tickInfo = {
@@ -9,12 +10,15 @@ export const tickInfo = {
 }
 
 export const factoryInfo = {
-	cost: 100,
+	cost: {
+		credits: 100 
+	},
 	creditProduction: .25,
 	requiredPower: .1
 }
 
-export const powerplantInfo = {
-	cost: 180,
+export const powerPlantInfo = {
+	cost: {
+		credits: 180},
 	powerProduction: 1
 }

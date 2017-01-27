@@ -1,5 +1,6 @@
 State
 - gameTime
-- credits
+- resources
+	- credits
 - factories
 - powerPlants

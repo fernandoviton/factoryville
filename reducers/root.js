@@ -1,25 +1,47 @@
-import { startingResources, tickInfo } from '../resources/constants'
+import { startingResources, tickInfo, factoryInfo, powerPlantInfo } from '../resources/constants'
+import { poweredFactories } from '../util/state'
 
 export default (state = {
-  credits: startingResources.credits, 
+  resources: {
+    credits: startingResources.credits,
+  }, 
   gameTime: 0, 
-  factories: startingResources.factories
+  factories: startingResources.factories,
+  powerPlants: startingResources.powerPlants
 }, 
 action) => {
   
-  if (action.suppressLog === undefined)
-    console.log('handling action:', action)
+  if (action.suppressLog === undefined) {
+    console.log('handling action:', action, state)
+  }
 
   switch (action.type) {
     case 'ADD_CREDITS':
-      return {...state, credits: state.credits + action.numCredits}
+      return {...state, 
+        resources: {
+          ...state.resources, 
+          credits: state.resources.credits + action.numCredits}}
     case 'ADD_GAME_TIME':
       return {...state, gameTime: state.gameTime + action.gameTime}
     case 'ADD_FACTORIES':
-      return {...state, factories: state.factories + action.numFactories}
+      const newFactories = newAssetCount(state.resources, factoryInfo, action.numFactories)
+      return {...state, 
+        factories: state.factories + newFactories,
+        resources: {
+          ...state.resources,
+          credits: state.resources.credits - (newFactories * factoryInfo.cost.credits)}}
+    case 'ADD_POWER_PLANTS':
+      const newPowerPlants = newAssetCount(state.resources, powerPlantInfo, action.numPowerPlants)
+      return {...state, 
+        powerPlants: state.powerPlants + newPowerPlants,
+        resources: {
+          ...state.resources,
+          credits: state.resources.credits - (newPowerPlants * powerPlantInfo.cost.credits)}}
     case 'ADVANCE_GAME_TIME':
       return {...state, 
-          credits: state.credits + newCredits(state, tickInfo.incrementMultiple),
+          resources: {
+            ...state.resources, 
+            credits: state.resources.credits + newCredits(state, tickInfo.incrementMultiple)},
           gameTime: state.gameTime + tickInfo.incrementMultiple
       }
   }
@@ -27,6 +49,19 @@ action) => {
   return state
 }
 
+const newCreditsFromFactories = (state) => {
+  const numFactories = poweredFactories(state)
+  return numFactories * factoryInfo.creditProduction
+}
+
 const newCredits = (state, incrementMultiple) => {
-  return state.factories * incrementMultiple
+  return newCreditsFromFactories(state) * incrementMultiple
+}
+
+const newAssetCount = (maxResourcesToSpend, assetInfo, requestedNewAssetCount) => {
+  const maxCreditsToSpend = maxResourcesToSpend.credits
+  const assetCost = assetInfo.cost.credits
+  const maxNewAssetCount = Math.floor(maxCreditsToSpend / assetCost)
+  const newAssetCount = Math.min(maxNewAssetCount, requestedNewAssetCount)
+  return newAssetCount 
 }
