@@ -9,7 +9,6 @@ export default class Root extends React.Component {
   render() {
     const { store } = this.context;
     const state = store.getState();
-    console.log('store on Root render:', state)
 
     return <div>
       <p>Game Time: {state.gameTime}</p>
