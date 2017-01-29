@@ -10,11 +10,6 @@ export default (state = {
   powerPlants: startingResources.powerPlants
 }, 
 action) => {
-  
-  if (action.suppressLog === undefined) {
-    console.log('handling action:', action, state)
-  }
-
   switch (action.type) {
     case 'ADD_CREDITS':
       return {...state, 
